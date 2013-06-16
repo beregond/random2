@@ -23,8 +23,6 @@ int memory_init(void);
 // Operations.
 struct file_operations memory_fops = {
 	read: memory_read,
-	open: memory_open,
-	release: memory_release
 };
 
 module_init(memory_init);
@@ -53,16 +51,6 @@ void memory_exit(void)
 	unregister_chrdev(memory_major, "random2");
 
 	printk("<1>Removing random2 module\n");
-}
-
-int memory_open(struct inode *inode, struct file *filp)
-{
-	return 0;
-}
-
-int memory_release(struct inode *inode, struct file *filp)
-{
-	return 0;
 }
 
 ssize_t memory_read(struct file *filp, char __user *buf, size_t count, loff_t *f_pos)
